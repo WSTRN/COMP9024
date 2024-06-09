@@ -22,9 +22,32 @@
         We don't discuss function pointer in this program.
 
 
-    2.   Access memory via variable names.       
+    2.   Access memory via variable names (for accessing global/local variables)
 
-    3.   Access memory via pointer variables
+         For simplicity, we only take global variables as an example in this program.
+         But global/local memory areas can be accessed similarly via variable names.
+         
+
+    3.   Access memory via pointer variables (for accessing global/local/heap variables)
+         
+         The object allocated on heap (via malloc()) does not have any name.
+         But the pointer variable 'ptr', which points to the heap object, has a name.
+         
+         void test(void) {
+            int *ptr = (int *) malloc(sizeof(int));
+            ...
+         }
+
+         
+         Memory Layout:
+
+                        --------------
+         ptr ------>     heap object
+                        --------------
+                           int
+
+        Again, we only access the global memory area via pointer variables in this program.
+        But global/local/heap memory areas can be accessed similarly via pointer variables.
 
     4.   Low-level pointer arithmetic via MemoryRead() and MemoryWrite().
 
@@ -411,9 +434,9 @@ It is also used as a multiplication operator in "30 * 40".
 **Address operator**
 
 
-It is denoted as the ampersand symbol, &.
+Denoted as the ampersand symbol, &.
 
-t is also used as a Bitwise AND operator in "2 & 4"
+It is also used as a Bitwise AND operator in "2 & 4"
 
 **For example**
 
@@ -698,7 +721,7 @@ lVar = 2025
 
 C strings (character arrays) are terminated by null character '\0' character with value zero.
 
-In [ASCII](https://www.asciitable.com/), he NUL control code has value 0 (0x00).
+In [ASCII](https://www.asciitable.com/), the NUL control code has value 0 (0x00).
 
 
 ```C
