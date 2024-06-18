@@ -25,10 +25,9 @@ It starts at a designated node, and explores as far as possible along each edge 
 
 This means it goes as deep as possible along one edge before exploring other edges.
 
+We have discussed the format of dot files in [COMP9024/Graphs](../../Graphs/Dot2Png/README.md), how to create a directed graph in [COMP9024/Graphs/DirectedGraph](../../Graphs/DirectedGraph/README.md), and how to create an undirected graph in [COMP9024/Graphs/UndirectedGraph](../../Graphs/UndiirectedGraph/README.md).
 
-We have discussed how to create a directed graph in [COMP9024/Graphs/DirectedGraph](../../Graphs/DirectedGraph/README.md).
-
-In this tutorial, we'll explore how to perform a recursive depth-first search within it.
+In this tutorial, we'll explore how to perform a recursive depth-first search within a directed graph.
 
 Non-recursive depth first search (based on a [data stack](../../Stacks/Stack_LL/README.md)) is left as the weekly practical exercise.
 
@@ -150,7 +149,7 @@ find . -name "*.png" | sort | xargs feh &
 
 ## Observe the procedure of DFS (starting from the node 3) via 'make view'
 
-**Click on the window of 'feh' to view images**.
+**Click on the window of 'feh' or use your mouse scroll wheel to view images**.
 
 Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/).
 

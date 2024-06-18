@@ -34,7 +34,7 @@ In this method, each node in the tree is visited in the following sequence:
 
 (2) Then the right subtree is traversed.
 
-(3) Finally, the root node of the subtree is traversed.
+(3) Finally, the root node is traversed.
 
 In [COMP9024/Trees/BiTree](../../Trees/BiTree/README.md), we have studied how to create a binary tree manually.
 
@@ -42,7 +42,9 @@ In this tutorial, we will delve into the creation of a binary tree (with a parse
 
 and its practical application in representing and evaluating an arithmetic expression (e.g., "9000 + (6 * 4)").
 
+Since variadic functions in C will be discussed in [COMP9024/Stacks/CallStack](../../Stacks/CallStack/README.md),
 
+you can skip the implementation details of the code in [COMP9024/Tutorials/Week4/src/error.c](./src/error.c) now.
 
 ## 1 How to download Tutorials in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 

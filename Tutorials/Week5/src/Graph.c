@@ -237,7 +237,6 @@ void RecursiveDFS(struct Graph *pGraph, long u) {
 
 
 /*
-/*
     Dot Files
 
 1.  Directed graph with labels
@@ -319,13 +318,20 @@ void Graph2Dot(struct Graph *pGraph,
         /*
         "0" [color=red]
          */
-        if (displayVisited && visited) {
-            for (long i = 0; i < pGraph->n; i++) {
-                if (visited[i]) {
-                    fprintf(dotFile, "\"%s\" [color=red]\n", pGraph->pNodes[i].name);
-                }
+        // if (displayVisited && visited) {
+        //     for (long i = 0; i < pGraph->n; i++) {
+        //         if (visited[i]) {
+        //             fprintf(dotFile, "\"%s\" [color=red]\n", pGraph->pNodes[i].name);
+        //         }
+        //     }
+        // }
+        for (long i = 0; i < pGraph->n; i++) {
+            if (displayVisited && visited && visited[i]) {
+                fprintf(dotFile, "\"%s\" [color=red]\n", pGraph->pNodes[i].name);
+            } else {
+                fprintf(dotFile, "\"%s\"\n", pGraph->pNodes[i].name);
             }
-        }        
+        }                
         fprintf(dotFile, "}\n");
         fclose(dotFile);
     }                

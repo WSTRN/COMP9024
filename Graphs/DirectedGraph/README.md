@@ -304,19 +304,25 @@ void GraphAddNode(struct Graph *pGraph, long u, char *name) {
 
 #### images/OurDirectedGraph_0000.dot
 ```
-    digraph OutDirectedGraph {    
-    "3" -> {"0"} [label="4"]
-    "3" -> {"4"} [label="2"]
-    "0" -> {"2"} [label="3"]
-    "0" -> {"4"} [label="4"]
-    "4" -> {"2"} [label="4"]
-    "4" -> {"6"} [label="5"]
-    "2" -> {"5"} [label="5"]
-    "1" -> {"2"} [label="2"]
-    "1" -> {"5"} [label="2"]
-    "6" -> {"5"} [label="5"]
-    "6" -> {"7"} [label="3"]
-    }
+digraph OurDirectedGraph {
+"0" -> {"2"}
+"0" -> {"4"}
+"1" -> {"5"}
+"2" -> {"1"}
+"2" -> {"5"}
+"2" -> {"6"}
+"3" -> {"0"}
+"4" -> {"2"}
+"6" -> {"7"}
+"0"
+"1"
+"2"
+"3"
+"4"
+"5"
+"6"
+"7"
+}
 ```
 
 ```C
@@ -364,11 +370,18 @@ void Graph2Dot(struct Graph *pGraph,
         /*
         "0" [color=red]
          */
-        if (displayVisited && visited) {
-            for (long i = 0; i < pGraph->n; i++) {
-                if (visited[i]) {
-                    fprintf(dotFile, "\"%s\" [color=red]\n", pGraph->pNodes[i].name);
-                }
+        // if (displayVisited && visited) {
+        //     for (long i = 0; i < pGraph->n; i++) {
+        //         if (visited[i]) {
+        //             fprintf(dotFile, "\"%s\" [color=red]\n", pGraph->pNodes[i].name);
+        //         }
+        //     }
+        // }
+        for (long i = 0; i < pGraph->n; i++) {
+            if (displayVisited && visited && visited[i]) {
+                fprintf(dotFile, "\"%s\" [color=red]\n", pGraph->pNodes[i].name);
+            } else {
+                fprintf(dotFile, "\"%s\"\n", pGraph->pNodes[i].name);
             }
         }        
         fprintf(dotFile, "}\n");
