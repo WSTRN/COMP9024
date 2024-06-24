@@ -19,6 +19,7 @@
 
 Dijkstra's algorithm is commonly used for finding the shortest path in a graph where the edge weights are non-negative. 
 
+To simplify our discussions, we assume the distance from one node to another (edge weight) is a positive integer.
 
 We have discussed the format of dot files in [COMP9024/Graphs](../../Graphs/Dot2Png/README.md), how to create a directed graph in [COMP9024/Graphs/DirectedGraph](../../Graphs/DirectedGraph/README.md), and how to create an undirected graph in [COMP9024/Graphs/UndirectedGraph](../../Graphs/UndiirectedGraph/README.md).
 
@@ -377,7 +378,7 @@ Shortest path from node 3 to node 7: 10
 // Storing information of a graph node
 struct GraphNode {
     char name[MAX_ID_LEN + 1]; 
-} GraphNode;
+};
 
 typedef long AdjMatrixElementTy;
 
@@ -392,7 +393,7 @@ struct Graph{
       
                           Element(n-1, 0), Element(n-1, 1),  ...,       Element(n-1, n-1)
                           ----------------------------------------------------------- 
-                                      Adjacent Matrix on Heap
+                                      Adjacency Matrix on Heap
 
      */
     AdjMatrixElementTy *pAdjMatrix;

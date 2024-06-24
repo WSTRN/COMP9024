@@ -74,7 +74,7 @@ click **Terminal -> Run Build Task**
 
 ### 2.3 Debug the project in VS Code
 
-Open src/main.c, and click to add a breakpoint (say, line 11).
+Open src/Graph.c, and click to add a breakpoint (say, line 216).
 
 Then, click **Run -> Start Debugging**
 
@@ -161,14 +161,17 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 | <img src="images/RecursiveDFS_0000.png" width="50%" height="50%"> |  
 
 
+**When debugging this program in VS Code, you can set a breakpoint at line 216 in [src/Graph.c](./src/Graph.c) to observe the nodes on call stack.**
 
 | Visiting 3 | Visiting 0 |  Visiting 2 | Visiting 1 |
 |:-------------:|:-------------:|:-------------:|:-------------:|
+| Nodes on call stack: $\color{red}{3}$ | Nodes on call stack: $\color{red}{0}$, 3 |Nodes on call stack: $\color{red}{2}$, 0, 3 |Nodes on call stack: $\color{red}{1}$, 2, 0, 3 |
 | <img src="images/RecursiveDFS_0001.png" width="50%" height="50%"> |  <img src="images/RecursiveDFS_0002.png" width="50%" height="50%"> | <img src="images/RecursiveDFS_0003.png" width="50%" height="50%"> | <img src="images/RecursiveDFS_0004.png" width="50%" height="50%"> | 
 
 
 | Visiting 5 | Visiting 6 |  Visiting 7 | Visiting 4 |
 |:-------------:|:-------------:|:-------------:|:-------------:|
+| Nodes on call stack: $\color{red}{5}$, 1, 2, 0, 3 | Nodes on call stack: $\color{red}{6}$, 2, 0, 3 |Nodes on call stack: $\color{red}{7}$, 6, 2, 0, 3 | Nodes on call stack: $\color{red}{4}$, 0, 3 |
 | <img src="images/RecursiveDFS_0005.png" width="50%" height="50%"> |  <img src="images/RecursiveDFS_0006.png" width="50%" height="50%"> | <img src="images/RecursiveDFS_0007.png" width="50%" height="50%"> | <img src="images/RecursiveDFS_0008.png" width="50%" height="50%"> | 
 
 
@@ -179,7 +182,7 @@ Here, **feh** is an image viewer available in [CSE VLAB](https://vlabgateway.cse
 // Storing information of a graph node
 struct GraphNode {
     char name[MAX_ID_LEN + 1]; 
-} GraphNode;
+};
 
 typedef long AdjMatrixElementTy;
 
@@ -194,7 +197,7 @@ struct Graph{
       
                           Element(n-1, 0), Element(n-1, 1),  ...,       Element(n-1, n-1)
                           ----------------------------------------------------------- 
-                                      Adjacent Matrix on Heap
+                                      Adjacency Matrix on Heap
 
      */
     AdjMatrixElementTy *pAdjMatrix;
