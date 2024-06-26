@@ -67,6 +67,8 @@ Our First Project
 
 [COMP9024/Graphs/UndirectedGraph](./Graphs/UndirectedGraph/README.md)
 
-[Depth First Search](./Tutorials/Week5/README.md)
+[COMP9024/Graphs/DepthFirstSearch](./Graphs/DepthFirstSearch/README.md)
 
-[Dijkstra's Shortest Path Algorithm](./Tutorials/Week7/README.md)
+[COMP9024/Graphs/Dijkstra](./Graphs/Dijkstra/README.md)
+
+
