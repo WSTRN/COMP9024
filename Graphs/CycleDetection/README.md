@@ -109,7 +109,7 @@ click **Terminal -> Run Build Task**
 
 ### 2.3 Debug the project in VS Code
 
-Open src/main.c, and click to add a breakpoint (say, line 11).
+Open src/Graph.c, and click to add a breakpoint (say, line 337).
 
 Then, click **Run -> Start Debugging**
 
@@ -259,8 +259,8 @@ CycleDetection$ make view
 
 find . -name "*.png" | sort | xargs feh -g 720x540 &
 
-CycleDetection$ find . -name "*.c" -or -name "*.c" | xargs cat | wc -l
-718
+CycleDetection$ find . -name "*.c" -or -name "*.h" | xargs cat | wc -l
+819
 
 ```
 
@@ -460,6 +460,59 @@ struct Graph{
 #define  MatrixElement(pGraph, u, v)  (pGraph)->pAdjMatrix[(pGraph)->n * (u) + (v)]
 
 ```
+### 5.1 About the Function-like Macro MatrixElement(pGraph, u, v)
+
+MatrixElement(pGraph, u, v) is a macro, not a function call.
+
+For example,
+
+**MatrixElement(pGraph, 3 - 1, 1)** is expanded as **(pGraph)->pAdjMatrix[(pGraph)->n * (3-1) + (1)]** by the [C preprocessor](../../C/HowToMake/README.md).
+
+
+If MatrixElement(pGraph, u, v) is defined as **(pGraph)->pAdjMatrix[(pGraph)->n * u + v]**,
+
+MatrixElement(pGraph, 3 - 1, 1) will be expanded as (pGraph)->pAdjMatrix[(pGraph)->n * 3 - 1 + 1].
+
+Apparently, **(pGraph)->pAdjMatrix[(pGraph)->n * 3 - 1 + 1]** is not the element the C programmer wants to access.
+
+That is why we need to add a pair of parentheses for pGraph, u, and v in **(pGraph)->pAdjMatrix[(pGraph)->n * (u) + (v)]**.
+
+### 5.2 Macro and Function
+
+```C
+// test.c
+#define MUL(a, b)  a * b
+
+int add(a, b) {
+    return a + b;
+}
+
+int r;
+
+int main(void) {
+    r = MUL(3-1, 2-1);  // bug
+    r = add(3-1, 2-1);
+    return 0;
+}
+```
+
+```sh
+$ gcc -E test.c
+
+int add(a, b) {
+    return a + b;
+}
+
+int r;
+
+int main(void) {
+    r = 3-1 * 2-1;
+    r = add(3-1, 2-1);
+    return 0;
+}
+
+```
+
 ## 6 Algorithm
 
 ### 6.1  main()

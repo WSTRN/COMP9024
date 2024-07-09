@@ -73,4 +73,10 @@ Our First Project
 
 [COMP9024/Graphs/CycleDetection](./Graphs/CycleDetection/README.md)
 
+[COMP9024/Graphs/BreadthFirstSearch](./Graphs/BreadthFirstSearch/README.md)
+
+[COMP9024/Trees/Tree2Dot](./Trees/Tree2Dot/README.md)
+
+[COMP9024/Trees/TreeTraversal](./Trees/TreeTraversal/README.md)
+
 
