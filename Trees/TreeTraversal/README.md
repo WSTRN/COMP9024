@@ -34,6 +34,30 @@ Non-recursive in-order traversal is left as the weekly practical exercise in [Tu
 
 (3) The right subtree is traversed.
 
+```C
+/*
+
+Input:
+           100
+          /   \
+        98    101
+       /  \
+     97    99
+
+Output:
+
+     97  98  99 100 101
+ */
+
+// An example in this project (COMP9024/Trees/TreeTraversal)
+void InOrderTraversal(BiTreeNodePtr root, NodeVisitor visit) {
+    if (root) {
+        InOrderTraversal(root->leftChild, visit);
+        visit(root);
+        InOrderTraversal(root->rightChild, visit);
+    }
+}
+```
 
 ### Pre-Order Traversal
 
@@ -43,6 +67,18 @@ Non-recursive in-order traversal is left as the weekly practical exercise in [Tu
 
 (3) The right subtree is traversed.
 
+```C
+// An example in COMP9024/Trees/Tree2Dot
+static void DisplayVisited(FILE *dotFile, BiTreeNodePtr root) {
+    if (root) {
+        if (root->visited) {
+            fprintf(dotFile, "\"%s\" [color=red]\n", root->value.name);
+        }
+        DisplayVisited(dotFile, root->leftChild);
+        DisplayVisited(dotFile, root->rightChild);
+    }
+}
+```
 
 ### Post-Order Traversal
 
@@ -52,8 +88,19 @@ Non-recursive in-order traversal is left as the weekly practical exercise in [Tu
 
 (3) The root node is traversed.
 
+```C
+// An example in COMP9024/Trees/Tree2Dot
+void ReleaseBinaryTree(BiTreeNodePtr root) {
+    if (root) {
+        ReleaseBinaryTree(root->leftChild);
+        ReleaseBinaryTree(root->rightChild);
+        free(root);
+    }
+}
+```
 
-## 1 How to download COMP9024/Trees/TreeTraversal in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
+
+## 1 How to download this project in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
 Open a terminal (Applications -> Terminal Emulator)
 
@@ -120,6 +167,8 @@ Then, click **Run -> Start Debugging**
 │   └── main.c           main()
 |
 |── images               containing *.dot and *.png files
+|
+|── diagrams             containing image files
 |
 └── .vscode              containing configuration files for Visual Studio Code
     |
@@ -328,6 +377,61 @@ void PostOrderTraversal(BiTreeNodePtr root, NodeVisitor visit) {
         visit(root);
     }
 }
+
+```
+
+### main()
+```C
+void ResetNodeState(BiTreeNodePtr root) {
+    if (root) {
+        ResetNodeState(root->leftChild);
+        ResetNodeState(root->rightChild);
+        root->visited = 0;
+    }
+}
+
+void PrintNodeInfo(BiTreeNodePtr pNode) {
+    printf("Visiting %s\n", pNode->value.name);
+    pNode->visited = 1;
+}
+
+int main(int argc, char **argv, char **env) {
+
+    // Create a binary tree
+    BiTreeNodePtr root = CreateBinaryTree();
+
+    // create a sub-directory 'images' (if it is not present) in the current directory
+    system("mkdir -p images");
+
+    printf("*****************  PreOrderTraversal() **********************\n");
+    PreOrderTraversal(root, PrintNodeInfo);
+    printf("\n\n");
+
+    printf("*****************  InOrderTraversal() **********************\n");
+    InOrderTraversal(root, PrintNodeInfo);
+    printf("\n\n");
+
+
+    printf("*****************  PostOrderTraversal() **********************\n");
+    PostOrderTraversal(root, PrintNodeInfo);
+    printf("\n\n");
+
+    printf("*****************  PreOrderTraversal2() **********************\n");
+    ResetNodeState(root);
+    PreOrderTraversal2(root, PrintNodeInfo);
+    printf("\n\n");
+
+    printf("*****************  PostOrderTraversal2() **********************\n");
+    ResetNodeState(root);
+    PostOrderTraversal2(root, PrintNodeInfo);
+    printf("\n\n");
+
+    // Free the heap memory
+    ReleaseBinaryTree(root);
+
+    return 0;
+}
+
 ```
 
 ### 5.2 Non-Recursive Algorithms
@@ -365,8 +469,11 @@ For a non-recursive post-order traversal,
 
 ```
 
-**For more details about Deterministic Finite Automata (DFA) , please see [Programming Languages and Compilers (COMP3131/COMP9102)](https://webcms3.cse.unsw.edu.au/COMP3131/24T1/).**
+For more details about Deterministic Finite Automata (DFA) , please see [Programming Languages and Compilers (COMP3131/COMP9102)](https://webcms3.cse.unsw.edu.au/COMP3131/24T1/).
 
+**In this project, the state transition occurs when a binary tree node becomes the top element of the data stack.**
+
+**In the non-recursive DFS algorithm, the data stack mimics/imitates the behavior of the call stack in the recursive algorithm.**
 
 | State Transition |
 |:-------------:|

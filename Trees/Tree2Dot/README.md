@@ -14,6 +14,125 @@
 
  *******************************************************************/
 ``` 
+#### Non-recursive Depth First Search (DFS) is based on a stack
+
+Non-recursive DFS (in [Tutorial 4](../../Tutorials/Week5/README.md)) uses an explicit [stack](../../Stacks/Stack_LL/README.md) data structure. 
+
+Unlike the recursive implementation that relies on the [call stack](../../Stacks/Recursion/README.md), the non-recursive approach uses a stack to keep track of nodes to be visited.
+
+DFS goes as deep as possible from the starting node before backtracking to explore other branches.
+
+|[Maze](https://sheisc.github.io/slides/COMP9024/24T2/week10/maze.html)|
+|:-------------:|
+| <img src="diagrams/Maze.png" width="100%" height="100%"> |
+
+#### Recursive Depth First Search (DFS) is based on the call stack
+
+A fractal is a geometric shape or pattern that is self-similar at different scales.
+
+Fractal trees are defined by their recursive, self-similar structure, where each branch subdivides into smaller branches that resemble the whole tree. 
+
+
+```sh
+
+Tree2Dot$ make tree
+
+python3 FractalTree.py &
+```
+
+**Recursion is hard**.
+
+**Recursion is beautiful**.
+
+|Fractal Tree (with 2 branches) |Fractal Tree (with 3 branches)|
+|:-------------:|:-------------:|
+| <img src="diagrams/FractalTree.png" width="60%" height="60%"> | <img src="diagrams/FractalTree3.png" width="60%" height="60%"> |
+
+To create graphics on the screen, we instruct the turtle (a pen) to move.
+
+Operating the [turtle](https://docs.python.org/3/library/turtle.html) is just like driving a car as follows.
+
+* Turn left
+
+* Turn right
+
+* Forward
+
+* Backward
+
+```Python
+import turtle
+
+# Fractal tree
+def draw_branch(t:turtle.Pen, length):
+    if length > 5:
+        # Pen size
+        sz = int(length / 20)
+        if sz < 1:
+            sz = 1
+        t.pensize(sz)
+
+        # Main branch
+        t.forward(length)
+
+        # turn right by 30 degrees
+        t.right(30)
+        # right sub-tree, the length of its main branch is (length - 15) pixels
+        draw_branch(t, length - 15)
+
+        # turn left by 60 degrees
+        t.left(60)
+        # left sub-tree,  the length of its branch is (length - 15) pixels
+        draw_branch(t, length - 15)
+
+        # turn right by 30 degrees
+        t.right(30)
+        # go back to the origin position
+        t.backward(length)
+
+
+def draw():
+    # Default direction:  --->
+    t = turtle.Pen()
+
+    # Direction: Up
+    t.left(90)
+    t.penup()
+    t.backward(260)
+    t.pendown()    
+    t.shape("turtle")
+    t.speed(6)
+    
+    colors = ['red', 'green']
+    for color in colors:
+        t.pencolor(color)
+        # the length of the main branch is 120 pixels
+        draw_branch(t, 120)
+    
+    #t.hideturtle()
+
+    screen = turtle.Screen()
+    #canvas = screen.getcanvas()
+    #canvas.postscript(file='FractalTree.eps')   
+    screen.exitonclick()
+
+
+if __name__ == '__main__':
+    draw()
+```
+
+#### Breadth First Search (BFS) is based on a queue
+
+BFS uses a [queue](../../Queues/Queue_LL/README.md) data structure to facilitate its exploration strategy. 
+
+The queue operates on a First-In-First-Out (FIFO) principle, meaning nodes are processed in the order they are added.
+
+Breadth First Search propagates like ripples.
+
+|BFS|
+|:-------------:|
+| <img src="diagrams/ripple.jpeg" width="100%" height="100%"> |  
+
 
 Breadth First Search (BFS) visits nodes level by level (layer by layer).
 
@@ -52,7 +171,7 @@ digraph OurBiTree {
 | <img src="images/OurBiTree_0000.png" width="50%" height="50%">  |
 
 
-## 1 How to download COMP9024/Trees/Tree2Dot in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
+## 1 How to download this project in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
 Open a terminal (Applications -> Terminal Emulator)
 
@@ -105,6 +224,8 @@ Then, click **Run -> Start Debugging**
 |
 ├── README.md            introduction to this tutorial
 |
+├── FractalTree.py       fractal tree
+|
 ├── src                  containing *.c and *.h
 |   |
 |   |
@@ -117,6 +238,8 @@ Then, click **Run -> Start Debugging**
 │   └── main.c           main()
 |
 |── images               containing *.dot and *.png files
+|
+|── diagrams             containing *.dot and *.png files
 |
 └── .vscode              containing configuration files for Visual Studio Code
     |

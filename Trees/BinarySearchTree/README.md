@@ -2,7 +2,7 @@
 
 ``` sh
 /*******************************************************************
-                Tutorial 7    Binary Search Tree
+                 Binary Search Tree
 
     1.  How to do an in-order traversal in a binary search tree
 
@@ -24,9 +24,9 @@ This arrangement allows for fast operations like searching, inserting, and delet
 
 We have discussed how to create a *.dot file in [COMP9024/Trees/Tree2Dot](../../Trees/Tree2Dot/README.md) for a binary tree.
 
-In this tutorial, we study how to insert and delete data in a BST.
+In this project, we study how to insert and delete data in a BST.
 
-Searching within a BST is left as the weekly practical exercise.
+Searching within a BST is left as the weekly practical exercise in [Tutorial 7](../../Tutorials/Week9/README.md).
 
 ```sh
            50  
@@ -41,7 +41,7 @@ Searching within a BST is left as the weekly practical exercise.
 ```
 
 
-## 1 How to download COMP9024/Tutorials/Week9 in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
+## 1 How to download this project in [CSE VLAB](https://vlabgateway.cse.unsw.edu.au/)
 
 Open a terminal (Applications -> Terminal Emulator)
 
@@ -49,9 +49,9 @@ Open a terminal (Applications -> Terminal Emulator)
 
 $ git clone https://github.com/sheisc/COMP9024.git
 
-$ cd COMP9024/Tutorials/Week9
+$ cd COMP9024/Trees/BinarySearchTree
 
-Week9$ 
+BinarySearchTree$ 
 
 ```
 
@@ -61,11 +61,11 @@ Week9$
 
 ```sh
 
-Week9$ code
+BinarySearchTree$ code
 
 ```
 
-Two configuration files (Week9/.vscode/[launch.json](https://code.visualstudio.com/docs/cpp/launch-json-reference) and Week9/.vscode/[tasks.json](https://code.visualstudio.com/docs/editor/tasks)) have been preset.
+Two configuration files (BinarySearchTree/.vscode/[launch.json](https://code.visualstudio.com/docs/cpp/launch-json-reference) and BinarySearchTree/.vscode/[tasks.json](https://code.visualstudio.com/docs/editor/tasks)) have been preset.
 
 
 
@@ -73,7 +73,7 @@ Two configuration files (Week9/.vscode/[launch.json](https://code.visualstudio.c
 
 In the window of Visual Studio Code, please click "File" and "Open Folder",
 
-select the folder "COMP9024/Tutorials/Week9", then click the "Open" button.
+select the folder "COMP9024/Trees/BinarySearchTree", then click the "Open" button.
 
 
 #### 2.2 Build the project in VS Code
@@ -126,9 +126,9 @@ Makefile is discussed in [COMP9024/C/HowToMake](../../C/HowToMake/README.md).
 
 ``` sh
 
-Week9$ make
+BinarySearchTree$ make
 
-Week9$ ./main
+BinarySearchTree$ ./main
 
 *******************************  Testing BiTreeInsert() *******************************
 
@@ -159,7 +159,7 @@ After deleting 50
 
 
 ```sh
-Week9$ make view
+BinarySearchTree$ make view
 ```
 
 **Click on the window of 'feh' or use your mouse scroll wheel to view images**.
@@ -267,14 +267,33 @@ int main(int argc, char **argv, char **env) {
     long nums[] = {50, 20, 10, 30, 40, 70, 60, 100, 90, 80};
     for (int i = 0; i < sizeof(nums)/sizeof(nums[0]); i++) {
         BiTreeInsert(&root, nums[i], NULL);
-        // ...     
+
+        printf("After inserting %ld \n", nums[i]);
+
+        printf("*****************  InOrderTraversal() **********************\n");
+        InOrderTraversal(root, PrintNodeInfo);
+        printf("\n\n");
+
+        cnt++;              
+        GenOneImage(root, "BiTreeBiTreeInsert", "images/BiTreeBiTreeInsert", cnt);        
     }
+    printf("\n");
 
     printf("\n\n\n*******************************  Testing BiTreeDelete() *******************************\n\n\n");
+    cnt = 0;
+    GenOneImage(root, "BiTreeDelete", "images/BiTreeDelete", cnt);
     for (int i = 0; i < sizeof(nums)/sizeof(nums[0]); i++) {                        
         BiTreeDelete(&root, &root, nums[i]);
-        // ...
+        printf("After deleting %ld \n", nums[i]);
+        printf("*****************  InOrderTraversal() **********************\n");
+        InOrderTraversal(root, PrintNodeInfo);
+        printf("\n\n");
+
+        //cnt++;              
+        //GenOneImage(root, "BiTreeDelete", "images/BiTreeDelete", cnt);        
     }
+    printf("\n");  
+    
     // Free the heap memory
     ReleaseBinaryTree(root);
     return 0;
@@ -386,43 +405,4 @@ void BiTreeDelete(BiTreeNodePtr *pRoot, BiTreeNodePtr *pNodePtr, long numVal) {
         }
     }
 }
-```
-
-## 6 Practical exercise
-
-**Our tutors will NOT answer the following questions in tutorials.**
-
-**Please complete the code in Q1-Q5 (BiTreeSearch() in [BiTree.c](./src/BiTree.c)) and then answer the questions in Quiz 7 (Week 9) on [Moodle](https://moodle.telt.unsw.edu.au/my/courses.php).**
-
-```C
-BiTreeNodePtr BiTreeSearch(BiTreeNodePtr root, long numVal) {
-    if (______Q1______) {
-        return ______Q2______;
-    } else if (numVal == root->value.numVal) {
-        return ______Q3______;
-    } else if (numVal < root->value.numVal) {
-        return ______Q4______;
-    } else { // numVal > root->value.numVal
-        return ______Q5______;
-    }
-}
-```
-
-
-## Once you have completed the code in Q1-Q5 correctly, you will see the following output.
-
-
-``` sh
-
-...
-
-*******************************  Testing BiTreeSearch() *******************************
-
-
-Found: BiTreeSearch(root, 80) == 80
-
-...
-
-
-
 ```
