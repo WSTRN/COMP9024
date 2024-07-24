@@ -92,7 +92,7 @@ Then, click **Run -> Start Debugging**
 ```sh
 ├── Makefile             defining set of tasks to be executed (the input file of the 'make' command)
 |
-├── README.md            introduction to this tutorial
+├── README.md            introduction to this project
 |
 ├── src                  containing *.c and *.h
 |   |
@@ -335,7 +335,7 @@ BiTreeNodePtr BiTreeMinValueNode(BiTreeNodePtr root) {
 }
 
 // The parameter pRoot is only used for generating the image of the binary search tree.
-// In this recursive function, pNodePtr might point to a sub-tree in the BST.
+// In this recursive function, *pNodePtr might point to a sub-tree in the BST.
 void BiTreeDelete(BiTreeNodePtr *pRoot, BiTreeNodePtr *pNodePtr, long numVal) {
     static long cnt = 0;
 
