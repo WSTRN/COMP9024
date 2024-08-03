@@ -299,6 +299,16 @@ static AstStmtNodePtr DoWhileStatement(void) {
   // Q18. ___________________
   // Q19. ___________________
   // Q20. ___________________  
+  doWhileStmt = CreateStmtNode(TK_DO);
+  Expect(TK_DO);
+  doWhileStmt->kids[0] = CreateLabelNode();
+  doWhileStmt->thenStmt = Statement();
+  Expect(TK_WHILE);
+  Expect(TK_LPAREN);
+  doWhileStmt->expr = Expression();
+  Expect(TK_RPAREN);
+  Expect(TK_SEMICOLON);
+  doWhileStmt->kids[1] = CreateLabelNode();
 
   return doWhileStmt;
 }

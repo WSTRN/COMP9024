@@ -1,0 +1,5 @@
+scc
+TestSccHeap
+TestSccHeap.dSYM/
+scc.dSYM/
+tests/*.s
