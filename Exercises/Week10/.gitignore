@@ -1,0 +1,5 @@
+build
+*.png
+main
+.cache
+compile_commands.json
